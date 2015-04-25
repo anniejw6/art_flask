@@ -35,7 +35,7 @@ Download http://postgresapp.com/
 Add to bash_profile http://postgresapp.com/documentation/cli-tools.html
 ```
 which psql
-sudo -u postgres createuser -s $USER
+sudo -u _postgres createuser -s $USER #note underscore before postgres
 createdb -U $USER --locale=en_US.utf-8 -E utf-8 -O $USER yournewdb -T template0
 pip install -U psycopg2
 pip install Flask-SQLAlchemy
