@@ -25,17 +25,20 @@ def index():
 	# db.session.add(art2)
 	# db.session.add(art3)
 	# db.session.commit()
+	
+	form = forms.ContactForm()
 
 	return render_template('index.html',
-		image = session['r_img_num']['name'], title = 'ArtFlask', user = user)
+		image = session['r_img_num']['name'], title = 'ArtFlask', user = user,
+		form = form)
 
 @app.route('/contact/', methods = ['GET', 'POST'])
 def contact():
 	form = forms.ContactForm()
 	
 	if request.method == "POST":
-		response_form  = request.form['subject']
-		response_content = request.form['message']
+		response_form  = request.form['response_form']
+		response_content = request.form['response_content']
 		user_id = 1
 		art_id = session['r_img_num']['num']
 		response = models.Response(user_id, art_id, response_form, response_content)
