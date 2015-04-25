@@ -52,6 +52,7 @@ odo==0.3.1
 openpyxl==1.8.5
 pandas==0.15.2
 patsy==0.3.0
+pbr==0.10.8
 pep8==1.6.2
 Pillow==2.7.0
 ply==3.4
@@ -85,9 +86,12 @@ sockjs-tornado==1.0.1
 Sphinx==1.2.3
 spyder==2.3.4
 SQLAlchemy==0.9.9
+sqlalchemy-migrate==0.9.6
+sqlparse==0.1.15
 statsmodels==0.6.1
 sympy==0.7.6
 tables==3.1.1
+Tempita==0.5.2
 terminado==0.5
 toolz==0.7.1
 tornado==4.1

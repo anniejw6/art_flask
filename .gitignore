@@ -1,2 +1,6 @@
+# mac related bullshit
+.DS_store
+
+# virtual env
 flask
 *.pyc
