@@ -74,12 +74,6 @@ for row in result:
 
 # Misc.
 
-Postgres Installation is a bitch.
-```
-pip install --upgrade setuptools
-brew install postgresql
-```
-
 psycopg2
 http://stackoverflow.com/questions/11538249/python-pip-install-psycopg2-install-error
 ```
