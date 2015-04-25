@@ -27,6 +27,9 @@ heroku login
 heroku create APP_NAME
 git remote add REMOTE_NAME git@heroku.com:APP_NAME.git
 git push REMOTE_NAME master
+heroku run python
+from app import db
+db.create_all()
 ```
 If authentication error, https://devcenter.heroku.com/articles/keys
 Make sure you're not on a network that blocks certain ports
