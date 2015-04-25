@@ -8,6 +8,6 @@ def randImg():
 @app.route('/')
 @app.route('/index')
 def index():
-	user = {'nickname':'Bobert'} 
+	user = {'nickname':'TayTay'} 
 	return render_template('index.html',
 	image = randImg(), title = 'ArtFlask', user = user)
