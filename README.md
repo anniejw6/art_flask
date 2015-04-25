@@ -28,6 +28,18 @@ git push REMOTE_NAME master
 If authentication error, https://devcenter.heroku.com/articles/keys
 Make sure you're not on a network that blocks certain ports
 
+# Postgres
+See here: http://killtheyak.com/use-postgresql-with-django-flask/
+
+Download http://postgresapp.com/
+Add to bash_profile http://postgresapp.com/documentation/cli-tools.html
+```
+which psql
+sudo -u postgres createuser -s $USER
+createdb -U $USER --locale=en_US.utf-8 -E utf-8 -O $USER yournewdb -T template0
+pip install -U psycopg2
+pip install Flask-SQLAlchemy
+```
 # Templates
 
 
