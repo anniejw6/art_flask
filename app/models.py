@@ -24,9 +24,9 @@ class Art(db.Model):
 class Response(db.Model):
 	response_id = db.Column(db.Integer, primary_key = True)
 	user_id = db.Column(db.Integer)
-	# art_id = db.Column(db.Integer)
+	art_id = db.Column(db.Integer)
 	# user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
-	art_id = db.Column(db.Integer, db.ForeignKey('art.art_id'))
+	# art_id = db.Column(db.Integer, db.ForeignKey('art.art_id'))
 	response_form = db.Column(db.Integer)
 	response_content = db.Column(db.Integer)
 

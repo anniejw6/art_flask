@@ -41,8 +41,8 @@ def contact():
 		response = models.Response(user_id, art_id, response_form, response_content)
 		db.session.add(response)
 		db.session.commit()
-		return models.Art.query.all()
-			
+		#return models.Art.query.all()
+		return str(len(models.Response.query.all()))
 	 
 	elif request.method == "GET":
 		return render_template('contact.html', form = form)
