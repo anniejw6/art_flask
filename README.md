@@ -45,16 +45,42 @@ createdb appdb
 
 # Templates
 
+# Models (database)
+
+Input
+```
+# /app python
+from app import db, models
+db.create_all()
+user = models.User('jamie@gmail.com')
+db.session.add(user)
+db.sesssion.commit()
+models.User.query.all() #auto generates ID!
+```
+
+Connecting via SQLAlchemy
+```
+from sqlachemy import create_engine
+engine  = create_engine('postgresql://localhost/appdb')
+connection = engine.connect()
+result = connection.execute("select * from response")
+for row in result:
+  print(row['response_id'])
+```
 
 # Misc.
 
+Postgres Installation is a bitch.
 ```
 pip install --upgrade setuptools
 brew install postgresql
 ```
 
-psycog2
+psycopg2
 http://stackoverflow.com/questions/11538249/python-pip-install-psycopg2-install-error
+```
+sudo PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin pip install psycopg2
+```
 ```
 sudo cp /Library/PostgreSQL/9.2/lib/libssl.1.0.0.dylib /usr/lib
 sudo cp /Library/PostgreSQL/9.2/lib/libcrypto.1.0.0.dylib /usr/lib
