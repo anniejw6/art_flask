@@ -45,15 +45,27 @@ createdb appdb
 
 # Templates
 
+# Models (database)
+
+```
+# /app python
+from app import db, models
+db.createall()
+user = models.User('jamie@gmail.com')
+db.session.add(user)
+db.sesssion.commit()
+models.User.query.all() #auto generates ID!
+```
 
 # Misc.
 
+Postgres Installation is a bitch.
 ```
 pip install --upgrade setuptools
 brew install postgresql
 ```
 
-psycog2
+psycopg2
 http://stackoverflow.com/questions/11538249/python-pip-install-psycopg2-install-error
 ```
 sudo cp /Library/PostgreSQL/9.2/lib/libssl.1.0.0.dylib /usr/lib
