@@ -63,7 +63,7 @@ sudo ln -fs /usr/lib/libcrypto.1.0.0.dylib /usr/lib/libcrypto.dylib
 ```
 
 **Good links**
-[Long end-to-end post](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database)
-[Short Flask & Heroku](http://blog.sahildiwan.com/posts/flask-and-postgresql-app-deployed-on-heroku/)
-[Medium Flask & Heroku](https://realpython.com/blog/python/flask-by-example-part-1-project-setup/)
+[Long end-to-end post](http://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-iv-database);
+[Short Flask & Heroku](http://blog.sahildiwan.com/posts/flask-and-postgresql-app-deployed-on-heroku/);
+[Medium Flask & Heroku](https://realpython.com/blog/python/flask-by-example-part-1-project-setup/);
 [Short Flask, Heroku & PostgreSQL](http://blog.y3xz.com/blog/2012/08/16/flask-and-postgresql-on-heroku)
