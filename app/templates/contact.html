@@ -3,17 +3,11 @@
   <form action="{{ url_for('contact') }}" method=post>
     {{ form.hidden_tag() }}
  
-    {{ form.name.label }}
-    {{ form.name }}
+    {{ form.response_form.label }}
+    {{ form.response_form }}
  
-    {{ form.email.label }}
-    {{ form.email }}
- 
-    {{ form.subject.label }}
-    {{ form.subject }}
- 
-    {{ form.message.label }}
-    {{ form.message }}
+    {{ form.response_content.label }}
+    {{ form.response_content }}
  
     {{ form.submit }}
   </form>
