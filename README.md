@@ -47,6 +47,7 @@ createdb appdb
 
 # Models (database)
 
+Input
 ```
 # /app python
 from app import db, models
@@ -55,6 +56,16 @@ user = models.User('jamie@gmail.com')
 db.session.add(user)
 db.sesssion.commit()
 models.User.query.all() #auto generates ID!
+```
+
+Connecting via SQLAlchemy
+```
+from sqlachemy import create_engine
+engine  = create_engine('postgresql://localhost/appdb')
+connection = engine.connect()
+result = connection.execute("select * from response")
+for row in result:
+  print(row['response_id'])
 ```
 
 # Misc.
