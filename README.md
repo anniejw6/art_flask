@@ -36,6 +36,10 @@ Add to bash_profile http://postgresapp.com/documentation/cli-tools.html
 ```
 createdb appdb
 ```
+
+# Databases
+``` python db_create.py```
+
 # Templates
 
 
@@ -44,5 +48,14 @@ createdb appdb
 ```
 pip install --upgrade setuptools
 brew install postgresql
-
 ```
+
+psycog2
+http://stackoverflow.com/questions/11538249/python-pip-install-psycopg2-install-error
+```
+sudo cp /Library/PostgreSQL/9.2/lib/libssl.1.0.0.dylib /usr/lib
+sudo cp /Library/PostgreSQL/9.2/lib/libcrypto.1.0.0.dylib /usr/lib
+sudo ln -fs /usr/lib/libssl.1.0.0.dylib /usr/lib/libssl.dylib
+sudo ln -fs /usr/lib/libcrypto.1.0.0.dylib /usr/lib/libcrypto.dylib
+```
+
