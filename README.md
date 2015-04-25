@@ -3,24 +3,39 @@
 Building a flask application with static images and interactive data I/O.
 
 # Setup 
-1. Creat new virtual environment
+Create new virtual environment
 ``` 
 python -m venv flask
 ```
 
-2. Activate virtualenv
+Activate virtualenv
 ```
 source flask/bin/activate
 ```
 
-3. run `requirements.txt`
+run `requirements.txt`
 ```
 pip install -r requirements.txt
 ```
+# Heroku
+Install Heroku toolbelt
+```
+heroku login
+heroku create APP_NAME
+git remote add REMOTE_NAME git@heroku.com:APP_NAME.git
+git push REMOTE_NAME master
+```
+If authentication error, https://devcenter.heroku.com/articles/keys
+Make sure you're not on a network that blocks certain ports
 
-4. Install Heroku toolbelt
+# Postgres
+See here: http://blog.sahildiwan.com/posts/flask-and-postgresql-app-deployed-on-heroku/
 
-
+Download http://postgresapp.com/
+Add to bash_profile http://postgresapp.com/documentation/cli-tools.html
+```
+createdb appdb
+```
 # Templates
 
 
