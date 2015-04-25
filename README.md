@@ -79,6 +79,9 @@ brew install postgresql
 psycopg2
 http://stackoverflow.com/questions/11538249/python-pip-install-psycopg2-install-error
 ```
+sudo PATH=$PATH:/Applications/Postgres.app/Contents/Versions/9.4/bin pip install psycopg2
+```
+```
 sudo cp /Library/PostgreSQL/9.2/lib/libssl.1.0.0.dylib /usr/lib
 sudo cp /Library/PostgreSQL/9.2/lib/libcrypto.1.0.0.dylib /usr/lib
 sudo ln -fs /usr/lib/libssl.1.0.0.dylib /usr/lib/libssl.dylib
