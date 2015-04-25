@@ -31,17 +31,21 @@ git push REMOTE_NAME master
 If authentication error, https://devcenter.heroku.com/articles/keys
 Make sure you're not on a network that blocks certain ports
 
-# Postgres
+# Databases
+
 See here: http://blog.sahildiwan.com/posts/flask-and-postgresql-app-deployed-on-heroku/
 
 Download http://postgresapp.com/
-Add to bash_profile http://postgresapp.com/documentation/cli-tools.html
+Add to bash_profile: http://postgresapp.com/documentation/cli-tools.html
 ```
 createdb appdb
+python
+from app import db
+db.create_all()
+quit()
 ```
 
-# Databases
-``` python db_create.py```
+
 
 # Templates
 
