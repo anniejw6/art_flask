@@ -51,7 +51,7 @@ Input
 ```
 # /app python
 from app import db, models
-db.createall()
+db.create_all()
 user = models.User('jamie@gmail.com')
 db.session.add(user)
 db.sesssion.commit()
