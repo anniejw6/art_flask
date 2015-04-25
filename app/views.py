@@ -1,21 +1,33 @@
-from flask import render_template, Flask, request, flash
+from flask import render_template, Flask, request, flash, session
 from app import app, forms, models, db
 from random import randint
 
 
 def randImg():
 	n = randint(1,3)
-	return "image" + str(n) + ".jpg"
+	return {'name': "image" + str(n) + ".jpg", 'num': n}
 
 
-#art = randImg()
+
+# 
 
 @app.route('/')
 @app.route('/index')
 def index():
+	session['r_img_num'] = randImg()
 	user = {'nickname':'TayTay'} 
+
+	# # Some fucked up shit we should get rid of later ###
+	# art1 = models.Art(1, 'image1.jpg')
+	# art2 = models.Art(2, 'image2.jpg')
+	# art3 = models.Art(3, 'image3.jpg')
+	# db.session.add(art1) 
+	# db.session.add(art2)
+	# db.session.add(art3)
+	# db.session.commit()
+
 	return render_template('index.html',
-	image = randImg(), title = 'ArtFlask', user = user)
+		image = session['r_img_num']['name'], title = 'ArtFlask', user = user)
 
 @app.route('/contact/', methods = ['GET', 'POST'])
 def contact():
@@ -25,11 +37,11 @@ def contact():
 		response_form  = request.form['subject']
 		response_content = request.form['message']
 		user_id = 1
-		art_id = 2
+		art_id = session['r_img_num']['num']
 		response = models.Response(user_id, art_id, response_form, response_content)
 		db.session.add(response)
 		db.session.commit()
-		return 'Hooray'
+		return models.Art.query.all()
 			
 	 
 	elif request.method == "GET":
