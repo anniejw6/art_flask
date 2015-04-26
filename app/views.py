@@ -59,7 +59,7 @@ def signUpUser():
 	response_content = int(float(request.form['response_content']) * 100)
 	user_id = 1
 	art_id = session['r_img_num']['num']
-	response = models.Response(user_id, art_id, response_form, response_content)
+	response = models.Response(user_id, response_form, response_content, art_id)
 	db.session.add(response)
 	db.session.commit()
 	return str(len(models.Response.query.all()))
