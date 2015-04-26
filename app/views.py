@@ -31,22 +31,23 @@ def index():
 
 @app.route('/contact/', methods = ['GET', 'POST'])
 def contact():
-	form = forms.ContactForm()
+	return str(len(models.Response.query.all()))
+# 	form = forms.ContactForm()
 	
-	if request.method == "POST":
-		response_form  = request.form['response_form']
-		response_content = request.form['response_content']
-		user_id = 1
-		art_id = session['r_img_num']['num']
-		response = models.Response(user_id, art_id, response_form, 
-			response_content)
-		db.session.add(response)
-		db.session.commit()
-		#return models.Art.query.all()
-		return str(len(models.Response.query.all()))
+# 	if request.method == "POST":
+# 		response_form  = request.form['response_form']
+# 		response_content = request.form['response_content']
+# 		user_id = 1
+# 		art_id = session['r_img_num']['num']
+# 		response = models.Response(user_id, art_id, response_form, 
+# 			response_content)
+# 		db.session.add(response)
+# 		db.session.commit()
+# 		#return models.Art.query.all()
+# 		return str(len(models.Response.query.all()))
 	 
-	elif request.method == "GET":
-		return render_template('contact.html', form = form)
+# 	elif request.method == "GET":
+# 		return render_template('contact.html', form = form)
 
 @app.route('/chart2/')
 def chart2():
@@ -62,7 +63,13 @@ def signUp():
 
 @app.route('/signUpUser', methods=['POST'])
 def signUpUser():
-    user =  request.form['username'];
-    password = request.form['password'];
-    return json.dumps({'status':'OK','user':user,'pass':password});
+
+	response_form =  int(float(request.form['response_form']) * 100)
+	response_content = int(float(request.form['response_content']) * 100)
+	user_id = 1
+	art_id = session['r_img_num']['num']
+	response = models.Response(user_id, art_id, response_form, response_content)
+	db.session.add(response)
+	db.session.commit()
+	return str(len(models.Response.query.all()))
 	# return request

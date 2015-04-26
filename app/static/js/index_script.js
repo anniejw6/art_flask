@@ -98,7 +98,7 @@ var w = 300, h = 250, padding = 20;
 
             
                 $('button').click(function(){
-                    d = 'username='+transX+'&password='+transY;
+                    d = 'response_form='+transX+'&response_content='+transY;
                     console.log(d);
                     $.ajax({
                         url: '/signUpUser',
