@@ -70,13 +70,13 @@ var w = 300, h = 250, padding = 20;
                         .attr("r", "5")
                         .attr("class", "dot")
                         .style("cursor", "pointer");
-                    // alert( (transX) + ' , ' + (transY) ); 
+                    // alert( (transX) + ' , ' + (transY) );
 
                     // autofocus on submit
-                    $('button').focus();
-
+                    $('button[type=submit]').focus();
                 });
-                  
+                
+
                 $('button').click(function(){
                     d = 'response_form='+transX+'&response_content='+transY;
                     console.log(d);
