@@ -12,9 +12,6 @@ def randImg():
 	return {'url' : base.format(img[0:6], img), 'num': n}
 
 
-
-# 
-
 @app.route('/')
 @app.route('/index')
 def index():
