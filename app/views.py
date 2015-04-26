@@ -41,7 +41,8 @@ def contact():
 		response_content = request.form['response_content']
 		user_id = 1
 		art_id = session['r_img_num']['num']
-		response = models.Response(user_id, art_id, response_form, response_content)
+		response = models.Response(user_id, art_id, response_form, 
+			response_content)
 		db.session.add(response)
 		db.session.commit()
 		#return models.Art.query.all()
@@ -49,6 +50,18 @@ def contact():
 	 
 	elif request.method == "GET":
 		return render_template('contact.html', form = form)
+
+@app.route('/chart2/', methods = ['GET', 'POST'])
+def chart2():
+	return render_template('chart2.html')
+
+@app.route('/addData',methods = ['POST', 'GET'])
+def add_data():
+	if request.method == 'POST':
+		title = request.json['title']
+		return title
+	elif request.method == 'GET':
+		return 'get'
 
 @app.route('/chart/')
 def chart():
