@@ -1,6 +1,8 @@
 from flask import render_template, Flask, request, flash, session
 from app import app, forms, models, db
 from random import randint
+from sqlalchemy import func
+import pandas as pd
 import json
 
 def randImg():
@@ -34,22 +36,27 @@ def index():
 @app.route('/contact/', methods = ['GET', 'POST'])
 def contact():
 	return str(len(models.Response.query.all()))
-# 	form = forms.ContactForm()
+
+@app.route("/gdata")
+@app.route("/gdata/<float:mux>/<float:muy>")
+def gdata(ndata=100,mux=.5,muy=0.5):
+    """
+    Pulls data from database
+    """
+    # query database
+    r =  models.Response
+    q = db.session.query(r.art_id, 
+    	func.count(r.response_id)).group_by(r.art_id).all()
+    # Dump to JSON
+    x = pd.DataFrame(q)
+    x.columns = ['letter', 'frequency']
+    return x.to_json(orient='records')
+    #return json.dumps(dict(q))
+
+@app.route('/output/', methods = ['GET', 'POST'])
+def output():
 	
-# 	if request.method == "POST":
-# 		response_form  = request.form['response_form']
-# 		response_content = request.form['response_content']
-# 		user_id = 1
-# 		art_id = session['r_img_num']['num']
-# 		response = models.Response(user_id, art_id, response_form, 
-# 			response_content)
-# 		db.session.add(response)
-# 		db.session.commit()
-# 		#return models.Art.query.all()
-# 		return str(len(models.Response.query.all()))
-	 
-# 	elif request.method == "GET":
-# 		return render_template('contact.html', form = form)
+	return render_template('output.html')
 
 
 @app.route('/signUpUser', methods=['POST'])
@@ -63,4 +70,3 @@ def signUpUser():
 	db.session.add(response)
 	db.session.commit()
 	return str(len(models.Response.query.all()))
-	# return request
