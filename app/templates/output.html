@@ -1,0 +1,41 @@
+<html>
+    
+    <head>
+        <title>Test</title>
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+        <style>
+          #chart rect{
+            fill: #4aaeea;
+          }
+
+          #chart text{
+            fill: black;
+            font: 10px sans-serif;
+            text-anchor: end; 
+          }
+
+          .axis text{
+            font: 10px sans-serif;
+          }
+
+          .axis path, .axis line{
+            fill: none;
+            stroke : #fff;
+            shape-rendering: crispEdges;
+          }
+
+          body{
+            /*background: #1a1a1a;
+            color : #eaeaea;*/
+            padding : 10px;
+          }
+        </style>
+    </head>
+    
+    <body>
+        <div id="chart"></div> 
+        <script src="{{ url_for('static', filename = 'js/output_script.js') }}"></script>
+    </body>
+
+</html>
