@@ -8,9 +8,6 @@ def randImg():
 	return {'name': "image" + str(n) + ".jpg", 'num': n}
 
 
-
-# 
-
 @app.route('/')
 @app.route('/index')
 def index():
@@ -41,7 +38,7 @@ def contact():
 		response_content = request.form['response_content']
 		user_id = 1
 		art_id = session['r_img_num']['num']
-		response = models.Response(user_id, art_id, response_form, response_content)
+		response = models.Response(user_id, response_form, response_content, art_id)
 		db.session.add(response)
 		db.session.commit()
 		#return models.Art.query.all()
