@@ -35,7 +35,14 @@ If authentication error, https://devcenter.heroku.com/articles/keys
 Make sure you're not on a network that blocks certain ports
 
 # Databases
-
+## Migrating
+```
+# Initialize
+python manage.py db init
+# AFTER EVERY DATABASE CHANGE
+python manage.py db migrate
+python manage.py db upgrade
+```
 See here: http://blog.sahildiwan.com/posts/flask-and-postgresql-app-deployed-on-heroku/
 
 Download http://postgresapp.com/
