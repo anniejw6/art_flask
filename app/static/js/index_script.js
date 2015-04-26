@@ -53,6 +53,7 @@ var w = 300, h = 250, padding = 20;
 
                 var transX;
                 var transY;
+
                 // add circle on click
                 $("rect").on( "click", function(e) {
 
@@ -70,33 +71,12 @@ var w = 300, h = 250, padding = 20;
                         .attr("class", "dot")
                         .style("cursor", "pointer");
                     // alert( (transX) + ' , ' + (transY) ); 
-                       
+
+                    // autofocus on submit
+                    $('button').focus();
+
                 });
-
-                // $('form').submit(function() {
-                //     // alert( (transX) + ' , ' + (transY) ); 
-                //     var d = JSON.stringify({title: 'hallo', article: 'test'});
-                //     alert(d);
-                //     $.ajax({
-                //         //data: {"x": transX, "y": transY},
-                //         type: 'POST',
-                //         contentType: "application/json; charset=utf-8",
-                //         url: '/addData',
-                //         data: d,
-                //         success: function(data){
-                //             console.log(data.title);
-                //             console.log(data.article);
-                //         },
-                //         error: function(error){
-                //             console.log(error);
-                //         },
-                //         dataType: "json"
-                //     });
-
-                      
-                // });
-
-            
+                  
                 $('button').click(function(){
                     d = 'response_form='+transX+'&response_content='+transY;
                     console.log(d);
