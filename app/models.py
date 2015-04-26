@@ -4,6 +4,7 @@ class Art(db.Model):
 	__tablename__ = 'art'
 	id = db.Column(db.Integer, primary_key=True)
 	image_path = db.Column(db.String(300), unique=True)
+	#garbage = db.Column(db.Integer)
 
 	responses = db.relationship('Response', backref = db.backref('art'))
 
