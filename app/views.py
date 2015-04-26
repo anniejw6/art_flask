@@ -46,17 +46,6 @@ def contact():
 # 	elif request.method == "GET":
 # 		return render_template('contact.html', form = form)
 
-@app.route('/chart2/')
-def chart2():
-	return render_template('chart2.html')
-
-@app.route('/chart/')
-def chart():
-	return render_template('chart.html')
-
-@app.route('/signUp')
-def signUp():
-    return render_template('signUp.html')
 
 @app.route('/signUpUser', methods=['POST'])
 def signUpUser():
