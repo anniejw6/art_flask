@@ -48,6 +48,23 @@ db.create_all()
 quit()
 ```
 
+Working with mapped postgres tables in python
+```
+from app import models, db
+a = models.Art
+r = models.Response
+
+for q in db.session.query(a): ## example
+  print(q)
+  
+result = []
+for i in db.session.query(a, r):
+  result.append(i)
+x = res[1]
+print(x)
+print(x[0])
+print(x[1].user_id)
+```
 
 
 # Templates
