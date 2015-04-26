@@ -4,12 +4,13 @@ class Art(db.Model):
 	__tablename__ = 'art'
 	id = db.Column(db.Integer, primary_key=True)
 	image_path = db.Column(db.String(300), unique=True)
-	#garbage = db.Column(db.Integer)
+	title = db.Column(db.String(500))
 
 	responses = db.relationship('Response', backref = db.backref('art'))
 
-	def __init__(self, image_path):
+	def __init__(self, image_path, title):
 		self.image_path = image_path
+		self.title = title
 
 	def __repr__(self):
 		return '<ID: {0} Path: {1}>'.format(self.id, self.image_path)

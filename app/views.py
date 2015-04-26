@@ -6,9 +6,17 @@ import json
 def randImg():
 
 	base = 'http://media.vam.ac.uk/media/thira/collection_images/{0}/{1}_jpg_ds.jpg'
-	image_id = ['2007BL4483', '2006BF0305', '2006AF0219', '2011FC6706', '2013GK1429', '2006AV6276', '2006BH6911']
+
+	# Grab list of IDs from database
+	image_id = []
+	for i in db.session.query(models.Art):
+		image_id.append(i)
+	image_id = [img.image_path for img in image_id]
+
+	# Grab random one
 	n = randint(0, (len(image_id) - 1))
 	img = image_id[n]
+
 	return {'url' : base.format(img[0:6], img), 'num': n}
 
 
@@ -51,7 +59,7 @@ def signUpUser():
 	response_content = int(float(request.form['response_content']) * 100)
 	user_id = 1
 	art_id = session['r_img_num']['num']
-	response = models.Response(user_id, art_id, response_form, response_content)
+	response = models.Response(user_id, response_form, response_content, art_id)
 	db.session.add(response)
 	db.session.commit()
 	return str(len(models.Response.query.all()))
