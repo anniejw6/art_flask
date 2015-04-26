@@ -17,45 +17,55 @@
                 /*border: dashed;*/
             }
 
-             body {
-    position: relative;
-    width: 100%;
-    /*border: 1px solid red;*/
-    display: block;
-  }
 
-  body > *  {
+section {
+    width: 80%;
+    height: 500px;
+    /*background: aqua;*/
     margin: auto;
-    width: 300px;
-    /*border: 1px solid blue;*/
+    padding: 10px;
+}
+div#one {
+    width: 50%;
+    /*background: red;*/
+    float: left;
+}
+div#two {
+    margin-left: 50%;
+  /*  background: black;*/
+}
+
+img.displayed {
     display: block;
-    overflow: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
   }
 
-  body > script {
-    display: none
-  }
+button{
+    margin: 0 auto;
+}
         </style>
 
   </head>
   <body>
 
-  <h1>Hello, {{ user.nickname }}!</h1>
-	<img src="{{url_for('static', filename = image)}}"
-	 width ="300">
+  <center><h1>Hello, {{ user.nickname }}!</h1></center>
 
-<div class="chartinput"> </div> <!-- /container -->
+  <section>
+    <div id="one">
+       <img class="displayed" src="{{url_for('static', filename = image)}}" width ="300">
+    </div>
+    <div id="two">
+      <div class="chartinput"> </div> <!-- /container -->
+            <!-- <form action="{{ url_for('contact') }}"> -->
+            </br>
+      <center><form>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+      </form></center>
+    </div>
+</section>
 <script src="static/js/index_script.js"></script>
-<div class="container">
-
-      <form class="form-signin" role="form">
-        <button class="btn btn-lg btn-primary btn-block" type="button">Submit</button>
-      </form>
-
-    
-
-</div> <!-- /container -->
-
   
 </body>
 </html>
