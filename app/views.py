@@ -1,7 +1,7 @@
 from flask import render_template, Flask, request, flash, session
 from app import app, forms, models, db
 from random import randint
-
+import json
 
 def randImg():
 	n = randint(1,3)
@@ -51,18 +51,21 @@ def contact():
 	elif request.method == "GET":
 		return render_template('contact.html', form = form)
 
-@app.route('/chart2/', methods = ['GET', 'POST'])
+@app.route('/chart2/')
 def chart2():
 	return render_template('chart2.html')
-
-@app.route('/addData',methods = ['POST', 'GET'])
-def add_data():
-	if request.method == 'POST':
-		title = request.json['title']
-		return title
-	elif request.method == 'GET':
-		return 'get'
 
 @app.route('/chart/')
 def chart():
 	return render_template('chart.html')
+
+@app.route('/signUp')
+def signUp():
+    return render_template('signUp.html')
+
+@app.route('/signUpUser', methods=['POST'])
+def signUpUser():
+    user =  request.form['username'];
+    password = request.form['password'];
+    return json.dumps({'status':'OK','user':user,'pass':password});
+	# return request

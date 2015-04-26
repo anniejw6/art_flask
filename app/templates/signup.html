@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,28 +10,13 @@
     <link rel="icon" href="../../favicon.ico">
 
     <title>Signin Template for Bootstrap</title>
-    <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
-   <script>
 
-   $(function(){
-      $('button').click(function(){
-        var user = $('#txtUsername').val();
-        var pass = $('#txtPassword').val();
-        $.ajax({
-          url: '/signUpUser',
-          data: $('form').serialize(),
-          type: 'POST',
-          success: function(response){
-            console.log(response);
-          },
-          error: function(error){
-            console.log(error);
-          }
-        });
-      });
-    });
+    <!-- Bootstrap core CSS -->
 
-   </script>
+    <!-- Custom styles for this template -->
+
+   <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+	<script src="static/js/script.js"></script>
    
   </head>
 
@@ -38,7 +24,7 @@
 
     <div class="container">
 
-      <form class="form-signin"  role="form">
+      <form class="form-signin" action = "/signUpUser/" role="form">
         <h2 class="form-signin-heading">Please Sign Up</h2>
         <input type="email" id="txtUsername" name="username" class="form-control" placeholder="Email address" required autofocus>
         <input type="password" id="txtPassword" name="password" class="form-control" placeholder="Password" required>
@@ -56,3 +42,4 @@
     <!-- Placed at the end of the document so the pages load faster -->
   </body>
 </html>
+

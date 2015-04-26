@@ -77,66 +77,81 @@
 
             $(function(){
 
-                // var transX;
-                // var transY;
-                // // add circle on click
-                // $("rect").on( "click", function(e) {
+                var transX;
+                var transY;
+                // add circle on click
+                $("rect").on( "click", function(e) {
 
-                //     var circle = svg.selectAll("circle").remove();
+                    var circle = svg.selectAll("circle").remove();
 
-                //     var posX = e.pageX - $(this).offset().left + padding, 
-                //         posY = e.pageY - $(this).offset().top + padding;
-                //     transX = (posX - padding)/(w - padding * 2);
-                //     transY = 1 - (posY - padding)/(h - padding * 2);
+                    var posX = e.pageX - $(this).offset().left + padding, 
+                        posY = e.pageY - $(this).offset().top + padding;
+                    transX = (posX - padding)/(w - padding * 2);
+                    transY = 1 - (posY - padding)/(h - padding * 2);
 
-                //     // Append a new point
-                //     svg.append("circle")
-                //         .attr("transform", "translate(" + posX + "," + posY + ")")
-                //         .attr("r", "5")
-                //         .attr("class", "dot")
-                //         .style("cursor", "pointer");
-                //     // alert( (transX) + ' , ' + (transY) ); 
+                    // Append a new point
+                    svg.append("circle")
+                        .attr("transform", "translate(" + posX + "," + posY + ")")
+                        .attr("r", "5")
+                        .attr("class", "dot")
+                        .style("cursor", "pointer");
+                    // alert( (transX) + ' , ' + (transY) ); 
                        
+                });
+
+                // $('form').submit(function() {
+                //     // alert( (transX) + ' , ' + (transY) ); 
+                //     var d = JSON.stringify({title: 'hallo', article: 'test'});
+                //     alert(d);
+                //     $.ajax({
+                //         //data: {"x": transX, "y": transY},
+                //         type: 'POST',
+                //         contentType: "application/json; charset=utf-8",
+                //         url: '/addData',
+                //         data: d,
+                //         success: function(data){
+                //             console.log(data.title);
+                //             console.log(data.article);
+                //         },
+                //         error: function(error){
+                //             console.log(error);
+                //         },
+                //         dataType: "json"
+                //     });
+
+                      
                 // });
 
-                $('form').submit(function() {
-                    // alert( (transX) + ' , ' + (transY) ); 
-                    var d = JSON.stringify({title: 'hallo', article: 'test'});
-                    alert(d);
+            
+                $('button').click(function(){
+                    d = 'username='+transX+'&password='+transY;
+                    console.log(d);
                     $.ajax({
-                        //data: {"x": transX, "y": transY},
-                        type: 'POST',
-                        contentType: "application/json; charset=utf-8",
-                        url: '/addData',
+                        url: '/signUpUser',
                         data: d,
-                        success: function(data){
-                            console.log(data.title);
-                            console.log(data.article);
+                        type: 'POST',
+                        success: function(response){
+                            console.log(response);
                         },
                         error: function(error){
                             console.log(error);
-                        },
-                        dataType: "json"
+                        }
                     });
-
-                      
                 });
-
             });
 
 
         </script>
 
-<form method = 'post' role = 'form'>
-    <input type="text" name="q" value="">
-    <input type="submit" value="Search Google">
-</form>
+            <div class="container">
 
-        <script>
-            
-        </script>
+      <form class="form-signin" role="form">
+        <button class="btn btn-lg btn-primary btn-block" type="button">Submit</button>
+      </form>
 
-       
+    
+
+    </div> <!-- /container -->
 
     </body>
 
