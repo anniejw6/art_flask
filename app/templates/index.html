@@ -1,24 +1,71 @@
 <html>
   <head>
     <title>{{ title }}</title>
+
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+        <style>
+            dot {
+                fill:black;
+                stroke:#999999;
+            }
+
+            svg {
+
+                display: block;
+                margin: 0 auto;
+                /*border: dashed;*/
+            }
+
+
+section {
+    width: 80%;
+    height: 500px;
+    /*background: aqua;*/
+    margin: auto;
+    padding: 10px;
+}
+div#one {
+    width: 50%;
+    /*background: red;*/
+    float: left;
+}
+div#two {
+    margin-left: 50%;
+  /*  background: black;*/
+}
+
+img.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px; /* whatever padding is */
+  }
+
+button{
+    margin: 0 auto;
+}
+        </style>
+
   </head>
   <body>
-      <h1>Hello, {{ user.nickname }}!</h1>
-	<img src="{{url_for('static', filename = image)}}"
-	 width ="300">
 
-<h2>Input</h2>
-  <form action="{{ url_for('contact') }}" method=post>
-    {{ form.hidden_tag() }}
-    </br>
-    {{ form.response_form.label }}
-    {{ form.response_form }}
-    </br>
-    {{ form.response_content.label }}
-    {{ form.response_content }}
-    </br>
-    {{ form.submit }}
-  </form>
+  <center><h1>Hello, {{ user.nickname }}!</h1></center>
+
+  <section>
+    <div id="one">
+       <img class="displayed" src="{{url_for('static', filename = image)}}" width ="300">
+    </div>
+    <div id="two">
+      <div class="chartinput"> </div> <!-- /container -->
+            <!-- <form action="{{ url_for('contact') }}"> -->
+            </br>
+      <center><form>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+      </form></center>
+    </div>
+</section>
+<script src="static/js/index_script.js"></script>
   
 </body>
 </html>
