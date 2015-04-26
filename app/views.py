@@ -17,20 +17,13 @@ def index():
 	session['r_img_num'] = randImg()
 	user = {'nickname':'TayTay'} 
 
-	# # Some fucked up shit we should get rid of later ###
-	# art1 = models.Art(1, 'image1.jpg')
-	# art2 = models.Art(2, 'image2.jpg')
-	# art3 = models.Art(3, 'image3.jpg')
-	# db.session.add(art1) 
-	# db.session.add(art2)
-	# db.session.add(art3)
-	# db.session.commit()
 	
-	form = forms.ContactForm()
+	
+	# form = forms.ContactForm()
 
 	return render_template('index.html',
-		image = session['r_img_num']['name'], title = 'ArtFlask', user = user,
-		form = form)
+		image = session['r_img_num']['name'], title = 'ArtFlask', user = user)
+		#,form = form)
 
 @app.route('/contact/', methods = ['GET', 'POST'])
 def contact():
