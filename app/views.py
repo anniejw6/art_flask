@@ -4,30 +4,27 @@ from random import randint
 import json
 
 def randImg():
-	n = randint(1,3)
-	return {'name': "image" + str(n) + ".jpg", 'num': n}
+
+	base = 'http://media.vam.ac.uk/media/thira/collection_images/{0}/{1}_jpg_ds.jpg'
+	image_id = ['2007BL4483', '2006BF0305', '2006AF0219', '2011FC6706', '2013GK1429', '2006AV6276', '2006BH6911']
+	n = randint(0, (len(image_id) - 1))
+	img = image_id[n]
+	return {'url' : base.format(img[0:6], img), 'num': n}
 
 
 
 # 
 
-@app.route('/',  methods = ['GET', 'POST'])
-@app.route('/index', methods = ['GET', 'POST'])
+@app.route('/')
+@app.route('/index')
 def index():
+
 	session['r_img_num'] = randImg()
 	user = {'nickname':'TayTay'} 
 
-	if request.method == "POST":
-		user =  request.form['username']
-		password = request.form['password']
-		#return json.dumps({'status':'OK','user':user,'pass':password});
-		return 'test'
-
-	elif request.method == "GET":
-
-		return render_template('index.html', 
-			image = session['r_img_num']['name'], 
-			title = 'ArtFlask', user = user)
+	return render_template('index.html', 
+		image_url = session['r_img_num']['url'], 
+		title = 'ArtFlask', user = user)
 
 @app.route('/contact/', methods = ['GET', 'POST'])
 def contact():
