@@ -49,3 +49,7 @@ def contact():
 	 
 	elif request.method == "GET":
 		return render_template('contact.html', form = form)
+
+@app.route('/chart/')
+def chart():
+	return render_template('chart.html')
