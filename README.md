@@ -38,10 +38,10 @@ Make sure you're not on a network that blocks certain ports
 ## Migrating
 ```
 # Initialize
-python manage.py db init
+python managedb.py db init
 # AFTER EVERY DATABASE CHANGE
-python manage.py db migrate
-python manage.py db upgrade
+python managedb.py db migrate
+python managedb.py db upgrade
 ```
 See here: http://blog.sahildiwan.com/posts/flask-and-postgresql-app-deployed-on-heroku/
 
