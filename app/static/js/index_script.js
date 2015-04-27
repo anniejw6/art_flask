@@ -20,8 +20,8 @@ var w = 300, h = 250, padding = 20;
                 .attr("height", h - padding * 2)
                 .attr("x", padding)
                 .attr("y", padding)
-                .style("stroke", "#999999");
-               // .style("fill", "#F6F6F6");
+                .style("stroke", "#999999")
+                .style("fill", "#F6F6F6");
 
 
             // X-Axis
