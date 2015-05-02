@@ -110,7 +110,7 @@ def signUpUser():
 
 
 # Log-In
-@app.route("/login", methods=["GET", "POST"])
+@app.route("/login/", methods=["GET", "POST"])
 def login():
 	"""For GET requests, display the login form. For POSTS, login the current user
 	by processing the form."""
@@ -127,8 +127,8 @@ def login():
 			#app.logger.info(session['user_id'])
 			session['user_idd'] = session['user_id']
 			flash("Logged in successfully.")
-			return redirect(url_for("contact"))
-	return render_template("login.html", form=form)
+			return redirect(url_for("index"))
+	return render_template("reg_login.html", form=form)
 
 
 @app.route("/logout/", methods=["GET"])
@@ -147,16 +147,18 @@ def logout():
 def register():
 	form = forms.LoginForm()
 	if request.method == 'GET':
-		return render_template('register.html', form = form)
+		return render_template('reg_login.html', form = form)
 	user = models.User(request.form['email'], 
 		bcrypt.generate_password_hash(request.form['password']))
 	db.session.add(user)
 	db.session.commit()
+	login_user(user, remember=True)
+	session['user_idd'] = session['user_id']
 	flash('User successfully registered')
-	return redirect(url_for('login'))
+	return redirect(url_for('index'))
  
 # @app.route('/login/',methods=['GET','POST'])
 # def login():
 #     if request.method == 'GET':
-#         return render_template('login.html')
+#         return render_template('reg_login.html')
 #     return redirect(url_for('index'))
