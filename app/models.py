@@ -18,14 +18,17 @@ class Art(db.Model):
 class Response(db.Model):
 	__tablename__ = 'response'
 	response_id = db.Column(db.Integer, primary_key = True)
-	user_id = db.Column(db.Integer)
+	session_id = db.Column(db.String(300))
+	user_id = db.Column(db.String(300))
 	response_form = db.Column(db.Integer)
 	response_content = db.Column(db.Integer)
 
 	art_id = db.Column(db.Integer, db.ForeignKey('art.id'))
 	# user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
 
-	def __init__(self, user_id, response_form, response_content, art_id):
+	def __init__(self, session_id, user_id, art_id,
+		response_form, response_content):
+		self.session_id = session_id
 		self.user_id = user_id
 		self.art_id = art_id
 		self.response_form = response_form
@@ -34,13 +37,55 @@ class Response(db.Model):
 	def __repr__(self):
 		return '<ID: %r>' % self.response_id
 
+class User(db.Model):
+	__tablename__ = 'user'
 
-# class User(db.Model):
-#     user_id = db.Column(db.Integer, primary_key=True)
-#     email = db.Column(db.String(120), unique=True)
+	email = db.Column(db.String, primary_key=True)
+	password = db.Column(db.String)
+	authenticated = db.Column(db.Boolean, default=True)
 
-#     def __init__(self, email):
-#         self.email = email
+	def is_active(self):
+		"""True, as all users are active."""
+		return True
 
-#     def __repr__(self):
-#         return '<ID  %r>' % self.user_id
+	def get_id(self):
+		"""Return the email address to satify Flask-Login's requirements."""
+		return self.email
+
+	def is_authenticated(self):
+		"""Return True if the user is authenticated."""
+		return True
+
+	def is_anonymous(self):
+		"""False, as anonymous users aren't supported."""
+		return False
+
+	# __tablename__ = 'user'
+	# user_id = db.Column(db.Integer, primary_key=True)
+	# email = db.Column(db.String(120), unique=True)
+	# password = db.Column(db.String)
+
+	# responses = db.relationship('Response', backref = db.backref('user'))
+
+	def __init__(self, email, password):
+
+		self.email = email
+		self.password = password
+
+	# def is_authenticated(self):
+	#     return True
+
+	# def is_active(self):
+	#     return True
+
+	# def is_anonymous(self):
+	#     return False
+
+	# def get_id(self):
+	#     try:
+	#         return unicode(self.user_id)  # python 2
+	#     except NameError:
+	#         return str(self.user_id)  # python 3
+
+	# def __repr__(self):
+	#     return '<User %r>' % (self.email)
