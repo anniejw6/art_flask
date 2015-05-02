@@ -42,7 +42,18 @@ button{
   </head>
   <body>
 <div class="container">
-<h3 class = "text muted">Hello, {{ user1.nickname }}!</h3>
+      <div class="header clearfix">
+        <nav>
+          <ul class="nav nav-pills pull-right">
+            <li role="presentation" class="active"><a href="#">Home</a></li>
+            <li role="presentation"><a href="#">About</a></li>
+            <li role="presentation"><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+        <h3 class="text-muted">Hello, {{ user1.nickname }}!</h3>
+      </div>
+
+
       <div class="row">
         <div class="col-md-6">
           <img class="displayed" src="{{image_url}}" width ="300">
