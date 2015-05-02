@@ -1,9 +1,25 @@
-from flask import render_template, Flask, request, flash, session
-from app import app, forms, models, db
+from flask import (render_template, Flask, request,
+	flash, session, redirect, url_for, g)
+from app import app, forms, models, db, lm, bcrypt
 from random import randint
 from sqlalchemy import func
 import pandas as pd
+from flask.ext.login import (LoginManager, login_required, login_user,
+	logout_user, current_user)
 import json
+from flask.ext.bcrypt import Bcrypt
+import logging
+
+#lm = LoginManager()
+#bcrypt = Bcrypt()
+
+@lm.user_loader
+def user_loader(user_id):
+    """Given *user_id*, return the associated User object.
+    :param unicode user_id: user_id (email) user to retrieve
+    """
+    #return models.User.query.filter_by(email = user_id).first()
+    return models.User.query.get(user_id)
 
 def randImg():
 
@@ -19,54 +35,117 @@ def randImg():
 	n = randint(0, (len(image_id) - 1))
 	img = image_id[n]
 
-	return {'url' : base.format(img[0:6], img), 'num': n}
+	return {'url': base.format(img[0:6], img), 'num': n}
 
 
+# Home Page
 @app.route('/')
 @app.route('/index')
 def index():
 
 	session['r_img_num'] = randImg()
-	user = {'nickname':'TayTay'} 
+	user1 = {'nickname': 'TayTay'}
 
-	return render_template('index.html', 
-		image_url = session['r_img_num']['url'], 
-		title = 'ArtFlask', user = user)
+	return render_template('index.html',
+			image_url = session['r_img_num']['url'], 
+			title = 'ArtFlask', user1 = user1)
 
+
+# Easy way to query database stupidly
 @app.route('/contact/', methods = ['GET', 'POST'])
+#@login_required
 def contact():
-	return str(len(models.Response.query.all()))
+	#return str(len(models.User.query.all()))
+	#app.logger.info(models.User.query.get('albatross'))
+	app.logger.info(current_user)
+	#return str(current_user)
+	return 'hello'
 
+# Data for Output
 @app.route("/gdata")
-@app.route("/gdata/<float:mux>/<float:muy>")
-def gdata(ndata=100,mux=.5,muy=0.5):
-    """
-    Pulls data from database
-    """
-    # query database
-    r =  models.Response
-    q = db.session.query(r.art_id, 
-    	func.count(r.response_id)).group_by(r.art_id).all()
-    # Dump to JSON
-    x = pd.DataFrame(q)
-    x.columns = ['letter', 'frequency']
-    return x.to_json(orient='records')
-    #return json.dumps(dict(q))
+def gdata():
+	"""
+	Pulls data from database
+	"""
+	# query database
+	r = models.Response
+	q = db.session.query(r.art_id,
+		func.count(r.response_id)).group_by(r.art_id).all()
+	# Dump to JSON
+	x = pd.DataFrame(q)
+	x.columns = ['letter', 'frequency']
+	return x.to_json(orient='records')
+	# return json.dumps(dict(q))
 
+
+# Check output
 @app.route('/output/', methods = ['GET', 'POST'])
 def output():
-	
+	#
 	return render_template('output.html')
 
 
+# Put things in database
 @app.route('/signUpUser', methods=['POST'])
 def signUpUser():
-
-	response_form =  int(float(request.form['response_form']) * 100)
+	response_form = int(float(request.form['response_form']) * 100)
 	response_content = int(float(request.form['response_content']) * 100)
 	user_id = 1
 	art_id = session['r_img_num']['num']
 	response = models.Response(user_id, response_form, response_content, art_id)
 	db.session.add(response)
 	db.session.commit()
+
 	return str(len(models.Response.query.all()))
+
+
+# Log-In
+@app.route("/login", methods=["GET", "POST"])
+def login():
+	"""For GET requests, display the login form. For POSTS, login the current user
+	by processing the form."""
+	form = forms.LoginForm()
+	#app.logger.info(session['user_id'])
+	if form.validate_on_submit():
+		user = models.User.query.filter_by(email = form.email.data).first()
+		if user and bcrypt.check_password_hash(user.password, form.password.data):
+			user.authenticated = True
+			db.session.add(user)
+			db.session.commit()
+			login_user(user, remember=True)
+			#app.logger.info(current_user)
+			app.logger.info(session['user_id'])
+			flash("Logged in successfully.")
+			return redirect(url_for("contact"))
+	return render_template("login.html", form=form)
+
+
+@app.route("/logout/", methods=["GET"])
+#@login_required
+def logout():
+	"""Logout the current user."""
+	user = current_user
+	user.authenticated = False
+	db.session.add(user)
+	db.session.commit()
+	logout_user()
+	#return render_template("logout.html")
+	return 'lgout'
+
+@app.route('/register/' , methods=['GET','POST'])
+def register():
+	form = forms.LoginForm()
+	if request.method == 'GET':
+		return render_template('register.html', form = form)
+	user = models.User(request.form['email'], 
+		bcrypt.generate_password_hash(request.form['password']))
+	db.session.add(user)
+	db.session.commit()
+	flash('User successfully registered')
+	return redirect(url_for('login'))
+ 
+# @app.route('/login/',methods=['GET','POST'])
+# def login():
+#     if request.method == 'GET':
+#         return render_template('login.html')
+#     return redirect(url_for('index'))
