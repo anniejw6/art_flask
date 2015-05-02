@@ -9,9 +9,8 @@ from flask.ext.login import (LoginManager, login_required, login_user,
 import json
 from flask.ext.bcrypt import Bcrypt
 import logging
+import uuid
 
-#lm = LoginManager()
-#bcrypt = Bcrypt()
 
 @lm.user_loader
 def user_loader(user_id):
@@ -37,13 +36,23 @@ def randImg():
 
 	return {'url': base.format(img[0:6], img), 'num': n}
 
+# Before first request
+@app.before_first_request
+def before_first():
+	session['session_idd'] = uuid.uuid4().hex
+
+	if current_user.is_authenticated():
+		session['user_idd'] = session['user_id']
+	else:
+		session['user_idd'] = session['session_idd'] 
 
 # Home Page
 @app.route('/')
 @app.route('/index')
 def index():
-
 	session['r_img_num'] = randImg()
+	app.logger.info(session['user_idd'])
+	app.logger.info(session['session_idd'])
 	user1 = {'nickname': 'TayTay'}
 
 	return render_template('index.html',
@@ -88,11 +97,12 @@ def output():
 # Put things in database
 @app.route('/signUpUser', methods=['POST'])
 def signUpUser():
-	response_form = int(float(request.form['response_form']) * 100)
-	response_content = int(float(request.form['response_content']) * 100)
-	user_id = 1
-	art_id = session['r_img_num']['num']
-	response = models.Response(user_id, response_form, response_content, art_id)
+	response = models.Response(
+		session_id = session['session_idd'], 
+		user_id = session['user_idd'], 
+		art_id = session['r_img_num']['num'],
+		response_form = int(float(request.form['response_form']) * 100),
+		response_content = int(float(request.form['response_content']) * 100))
 	db.session.add(response)
 	db.session.commit()
 
@@ -114,7 +124,8 @@ def login():
 			db.session.commit()
 			login_user(user, remember=True)
 			#app.logger.info(current_user)
-			app.logger.info(session['user_id'])
+			#app.logger.info(session['user_id'])
+			session['user_idd'] = session['user_id']
 			flash("Logged in successfully.")
 			return redirect(url_for("contact"))
 	return render_template("login.html", form=form)

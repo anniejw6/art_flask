@@ -18,14 +18,17 @@ class Art(db.Model):
 class Response(db.Model):
 	__tablename__ = 'response'
 	response_id = db.Column(db.Integer, primary_key = True)
-	user_id = db.Column(db.Integer)
+	session_id = db.Column(db.String(300))
+	user_id = db.Column(db.String(300))
 	response_form = db.Column(db.Integer)
 	response_content = db.Column(db.Integer)
 
 	art_id = db.Column(db.Integer, db.ForeignKey('art.id'))
 	# user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
 
-	def __init__(self, user_id, response_form, response_content, art_id):
+	def __init__(self, session_id, user_id, art_id,
+		response_form, response_content):
+		self.session_id = session_id
 		self.user_id = user_id
 		self.art_id = art_id
 		self.response_form = response_form
@@ -48,7 +51,7 @@ class User(db.Model):
 	def get_id(self):
 		"""Return the email address to satify Flask-Login's requirements."""
 		return self.email
-		
+
 	def is_authenticated(self):
 		"""Return True if the user is authenticated."""
 		return True
