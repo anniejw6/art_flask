@@ -34,7 +34,7 @@ def randImg():
 	n = randint(0, (len(image_id) - 1))
 	img = image_id[n]
 
-	return {'url': base.format(img[0:6], img), 'num': n}
+	return {'url': base.format(img[0:6], img), 'num': n + 1}
 
 # Before first request
 @app.before_first_request
