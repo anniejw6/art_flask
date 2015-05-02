@@ -2,6 +2,10 @@
 
 Building a flask application with static images and interactive data I/O.
 
+Production: [art-flask-pro.herokuapp.com](http://art-flask-pro.herokuapp.com/) (In theory, this should always work.)
+
+Staging: [art-flask-stage.herokuapp.com](http://art-flask-stage.herokuapp.com/) (Probably is broken.)
+
 # Setup 
 Create new virtual environment
 ``` 
@@ -40,8 +44,9 @@ heroku run python addTables.py
 ```
 Subsequent times
 ```
-
+git push REMOTE_NAME master
 ```
+(What to do when your database structure changes is still an open question)
 If authentication error, https://devcenter.heroku.com/articles/keys
 Make sure you're not on a network that blocks certain ports
 
