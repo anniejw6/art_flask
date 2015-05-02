@@ -26,10 +26,21 @@ Install Heroku toolbelt
 heroku login
 heroku create APP_NAME
 git remote add REMOTE_NAME git@heroku.com:APP_NAME.git
+```
+First time you push
+```
 git push REMOTE_NAME master
+heroku addons:add heroku-postgresql:dev
+heroku pg:promote HEROKU_POSTGRESQL_COLOR
 heroku run python
 from app import db
 db.create_all()
+quit()
+heroku run python addTables.py
+```
+Subsequent times
+```
+
 ```
 If authentication error, https://devcenter.heroku.com/articles/keys
 Make sure you're not on a network that blocks certain ports

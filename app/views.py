@@ -66,9 +66,9 @@ def index():
 def contact():
 	#return str(len(models.User.query.all()))
 	#app.logger.info(models.User.query.get('albatross'))
-	app.logger.info(current_user)
+	
 	#return str(current_user)
-	return 'hello'
+	return session['user_idd']
 
 # Data for Output
 @app.route("/gdata")
@@ -132,7 +132,7 @@ def login():
 
 
 @app.route("/logout/", methods=["GET"])
-#@login_required
+@login_required
 def logout():
 	"""Logout the current user."""
 	user = current_user
@@ -140,8 +140,9 @@ def logout():
 	db.session.add(user)
 	db.session.commit()
 	logout_user()
+	session['user_idd'] = session['session_idd']
 	#return render_template("logout.html")
-	return 'lgout'
+	return 'logged out'
 
 @app.route('/register/' , methods=['GET','POST'])
 def register():
