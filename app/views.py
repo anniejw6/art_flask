@@ -39,10 +39,11 @@ def randImg():
 
 	return {'url': base.format(img[0:6], img), 'num': n + 1}
 
-# Before first request
-@app.before_first_request
-def before_first():
-	session['session_idd'] = uuid.uuid4().hex
+# Before  request
+@app.before_request
+def before_request():
+	if 'session_idd' not in session:
+		session['session_idd'] = uuid.uuid4().hex
 
 	if current_user.is_authenticated():
 		session['user_idd'] = session['user_id']
@@ -54,8 +55,8 @@ def before_first():
 @app.route('/index')
 def index():
 	session['r_img_num'] = randImg()
-#	app.logger.info(session['user_idd'])
-#	app.logger.info(session['session_idd'])
+	app.logger.info(session['user_idd'])
+	app.logger.info(session['session_idd'])
 	user1 = {'nickname': 'TayTay'}
 
 	return render_template('index.html',
