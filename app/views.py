@@ -10,7 +10,10 @@ import json
 from flask.ext.bcrypt import Bcrypt
 import logging
 import uuid
+import sys
 
+app.logger.addHandler(logging.StreamHandler(sys.stdout))
+app.logger.setLevel(logging.ERROR)
 
 @lm.user_loader
 def user_loader(user_id):
@@ -51,8 +54,8 @@ def before_first():
 @app.route('/index')
 def index():
 	session['r_img_num'] = randImg()
-	app.logger.info(session['user_idd'])
-	app.logger.info(session['session_idd'])
+#	app.logger.info(session['user_idd'])
+#	app.logger.info(session['session_idd'])
 	user1 = {'nickname': 'TayTay'}
 
 	return render_template('index.html',
