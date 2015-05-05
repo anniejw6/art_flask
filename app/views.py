@@ -55,14 +55,16 @@ def before_request():
 @app.route('/index')
 def index():
 	session['r_img_num'] = randImg()
-	app.logger.info(session['user_idd'])
-	app.logger.info(session['session_idd'])
-	user1 = {'nickname': 'TayTay'}
+	#app.logger.info(session['user_idd'])
+	#app.logger.info(session['session_idd'])
 
 	return render_template('index.html',
-			image_url = session['r_img_num']['url'], 
-			title = 'ArtFlask', user1 = user1)
+			image_url = session['r_img_num']['url'])
 
+# About
+@app.route('/about/')
+def about():
+	return render_template('about.html')
 
 # Easy way to query database stupidly
 @app.route('/contact/', methods = ['GET', 'POST'])
@@ -146,7 +148,7 @@ def logout():
 	logout_user()
 	session['user_idd'] = session['session_idd']
 	#return render_template("logout.html")
-	return 'logged out'
+	return redirect(url_for("index"))
 
 @app.route('/register/' , methods=['GET','POST'])
 def register():
