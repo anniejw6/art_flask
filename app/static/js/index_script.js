@@ -74,6 +74,7 @@ var w = 300, h = 250, padding = 20;
 
                     // autofocus on submit
                     $('button[type=submit]').focus();
+
                 });
                 
 

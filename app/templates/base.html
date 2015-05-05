@@ -9,7 +9,7 @@
 
   <!-- <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet"> -->
   <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
-  <link href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename = 'css/grid.css') }}" rel="stylesheet">
 
   {% block css %}
   {% endblock %}
@@ -27,10 +27,25 @@
 
     <div class="header clearfix">
       <nav>
-        <ul class="nav nav-pills pull-right">
-          <li role="presentation" class="active"><a href="#">Home</a></li>
-          <li role="presentation"><a href="#">About</a></li>
-          <li role="presentation"><a href="#">Contact</a></li>
+        <ul class="nav nav-pills pull-right red">
+          <li role="presentation" {% if request.path == '/' %}class="active"{% endif %}>
+            <a href="/">Home</a>
+          </li>
+          <li role="presentation" {% if request.path == '/about/' %}class="active"{% endif %}>
+            <a href="{{ url_for('about') }}">About</a>
+          </li>
+          {% if current_user.is_authenticated() %}
+          <li role="presentation" {% if request.path == '/output/' %}class="active"{% endif %}>
+            <a href="{{ url_for('output') }}">Fun Graphs</a>
+          </li>
+          <li role="presentation" {% if request.path == '/logout/' %}class="active"{% endif %}>
+            <a href="{{ url_for('logout') }}">Log Out</a>
+          </li>
+          {% else %}
+          <li role="presentation" {% if request.path == '/login/' %}class="active"{% endif %}>
+            <a href="{{ url_for('login') }}">Log In</a>
+          </li>
+          {% endif %}
         </ul>
       </nav>
       <h3 class="text-muted">{% block page_head %} {% endblock %}</h3>
@@ -39,7 +54,13 @@
     {% block content %}
     {% endblock %}
 
+
   </div>
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">&copy; Annie and Jamie</p>
+      </div>
+    </footer>
 
 </body>
 </html>

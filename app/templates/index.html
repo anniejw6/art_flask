@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-{{ title }}
+ArtFlask
 {% endblock %}
 
 {% block css %}
@@ -39,7 +39,7 @@
 {% endblock %}
 
 {% block page_head %}
-Hello, {{ user1.nickname }}!
+Against Interpretation
 {% endblock %}
 
 {% block content %}
@@ -50,9 +50,11 @@ Hello, {{ user1.nickname }}!
   <div class="col-md-6">
     <div class="chartinput"> </div> 
     <script src="{{ url_for('static', filename = 'js/index_script.js') }}"></script> 
-  </br>
-  <form>
-    <center> <button class="btn btn-default" type="submit">Submit</button> </center>
-  </form>
+    </br>
+    <form>
+      <center> <button class="btn btn-default" type="submit">Submit</button> </center>
+    </form>
+  </div>
 </div>
+
 {% endblock %}
