@@ -148,7 +148,7 @@ def logout():
 	logout_user()
 	session['user_idd'] = session['session_idd']
 	#return render_template("logout.html")
-	return 'logged out'
+	return redirect(url_for("index"))
 
 @app.route('/register/' , methods=['GET','POST'])
 def register():
